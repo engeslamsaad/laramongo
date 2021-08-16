@@ -83,7 +83,7 @@ class PrimaryController extends Controller
         $getTable->user_id = $request->input('user_id');
         $getTable->user_name = $request->input('user_name');
         $getTable->save();
-        return $getTable->message;
+        return  $request;
     }
 
     function save(Request $request){
