@@ -42,7 +42,7 @@ class PrimaryController extends Controller
             $query_length = $request['length'];
             $request['limit']=$query_length ;
 
-            $users=new DBLog;
+            $users=new DBLogTest;
             $count=$users->count();
             $data=$users->orderBy("_id", "DESC")->simplepaginate($query_length)->toArray();
             // dd($request['limit'], $request['page'],$count );
