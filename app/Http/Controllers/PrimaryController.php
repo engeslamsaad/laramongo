@@ -63,6 +63,18 @@ class PrimaryController extends Controller
         return 1;
     }
 
+    function saveLogtest(Request $request){
+        $getTable = new DBLogTest;
+        $getTable->message = $request->input('message');
+        $getTable->level = $request->input('level');
+        $getTable->INFO = $request->input('INFO');
+        $getTable->extra = $request->input('extra');
+        $getTable->user_id = $request->input('user_id');
+        $getTable->user_name = $request->input('user_name');
+        $getTable->save();
+        return 1;
+    }
+
     function save(Request $request){
         $getTable = new Moloquent;
         $getTable->username = $request->input('username');

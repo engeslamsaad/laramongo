@@ -18,3 +18,4 @@ use Illuminate\Http\Request;
 // })->middleware('auth:api');
 
 Route::post('saveLog', ['uses' => 'PrimaryController@saveLog', 'as' => 'route_saveLog']);
+Route::post('saveLogtest', ['uses' => 'PrimaryController@saveLogtest', 'as' => 'route_saveLogtest']);
