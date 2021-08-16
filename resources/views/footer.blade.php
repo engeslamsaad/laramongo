@@ -16,7 +16,9 @@
             serverSide: true,
             buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
             "ajax": {
+
                 "url": '/json-home?un=123&up=321',
+                
             },
             columns: [{
                     data: 'user_id',

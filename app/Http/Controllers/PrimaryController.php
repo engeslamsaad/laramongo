@@ -44,7 +44,7 @@ class PrimaryController extends Controller
 
             $users=new DBLog;
             $count=$users->count();
-            $data=$users ->simplepaginate($query_length)->toArray();
+            $data=$users->orderBy("created_at", "DESC")->simplepaginate($query_length)->toArray();
             // dd($request['limit'], $request['page'],$count );
             $data['recordsTotal']=  $count;
             $data['recordsFiltered']=  $count;
