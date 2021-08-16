@@ -12,27 +12,37 @@ use Input, Redirect;
 class PrimaryController extends Controller
 {
 
-    function home($template="home"){
-        $getAllData = Moloquent::all();
-        return view($template, ['data_user' => $getAllData]);
+    function home(Request $request, $template="home"){
+        if($request->uh=="123" && $request->up=="321"){
+
+            $getAllData = Moloquent::all();
+            return view($template, ['data_user' => $getAllData]);
+        }else{
+            echo "WELCOME HOME ::)))";
+        }
     }
     function index(Request $request){
-        if ($request->start ==0) {
-            $request['page']=1;
-        } else {
-            $request['page']= ($request->start / $request->length)+1;
+        if ($request->uh=="123" && $request->up=="321") {
+            if ($request->start ==0) {
+                $request['page']=1;
+            } else {
+                $request['page']= ($request->start / $request->length)+1;
+            }
+
+            $query_length = $request['length'];
+            $request['limit']=$query_length ;
+
+            $users=new DBLog;
+            $count=$users->count();
+            $data=$users ->simplepaginate($query_length)->toArray();
+            // dd($request['limit'], $request['page'],$count );
+            $data['recordsTotal']=  $count;
+            $data['recordsFiltered']=  $count;
+            return response()->json($data);
+        }else{
+            echo "WELCOME HOME 2 ::)))";
+
         }
-
-        $query_length = $request['length'];
-        $request['limit']=$query_length ;
-
-        $users=new DBLog;
-        $count=$users->count();
-        $data=$users ->simplepaginate($query_length )->toArray();
-        // dd($request['limit'], $request['page'],$count );
-        $data['recordsTotal']=  $count;
-        $data['recordsFiltered']=  $count;
-        return response()->json($data);
 
     }
 
