@@ -63,7 +63,7 @@ class PrimaryController extends Controller
 
     function saveLog(Request $request){
         $getTable = new DBLog;
-        $getTable->message =utf8_encode($request->input('message'));
+        $getTable->message =$request->input('message');
         $getTable->level = $request->input('level');
         $getTable->INFO = $request->input('INFO');
         $getTable->extra = $request->input('extra');
@@ -76,7 +76,7 @@ class PrimaryController extends Controller
 
     function saveLogtest(Request $request){
         $getTable = new DBLogTest;
-        $getTable->message =utf8_encode($request->input('message'));
+        $getTable->message =$request->input('message');
         $getTable->level = $request->input('level');
         $getTable->INFO = $request->input('INFO');
         $getTable->extra = $request->input('extra');
