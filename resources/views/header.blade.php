@@ -9,9 +9,8 @@
 	<link rel="stylesheet" media="screen" href="{{ url('assets/css/dataTables.tableTools.css') }}">
 	<link rel="stylesheet" media="screen" href="{{ url('assets/css/style.css') }}">
 
-	<title>Laravel 5.3 - CRUD with MongoDB</title>
+	<title>4-eshopping | Log</title>
 
-	<!--  -->
 
 	<style>
 
@@ -29,7 +28,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Laravel 5.3 - CRUD with MongoDB</a>
+            <a class="navbar-brand" href="#">4-eshopping | Log</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

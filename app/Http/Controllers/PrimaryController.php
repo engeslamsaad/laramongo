@@ -12,17 +12,28 @@ use Input, Redirect;
 class PrimaryController extends Controller
 {
 
-    function index(){
-        // dd(0);
-        $users=DBLog::
-        // ->select("accounts.*")
-        // where('email', 'like', '%z%')
-        // ->
-        get();
- 
-        return response()->json($users);
-        //  dd($users);
-        // return Redirect::to('home');
+    function home($template="home"){
+        $getAllData = Moloquent::all();
+        return view($template, ['data_user' => $getAllData]);
+    }
+    function index(Request $request){
+        if ($request->start ==0) {
+            $request['page']=1;
+        } else {
+            $request['page']= ($request->start / $request->length)+1;
+        }
+
+        $query_length = $request['length'];
+        $request['limit']=$query_length ;
+
+        $users=new DBLog;
+        $count=$users->count();
+        $data=$users ->simplepaginate($query_length )->toArray();
+        // dd($request['limit'], $request['page'],$count );
+        $data['recordsTotal']=  $count;
+        $data['recordsFiltered']=  $count;
+        return response()->json($data);
+
     }
 
     function pages($template){
@@ -31,15 +42,14 @@ class PrimaryController extends Controller
     }
 
     function saveLog(Request $request){
-        // 
         $getTable = new DBLog;
         $getTable->message = $request->input('message');
         $getTable->level = $request->input('level');
         $getTable->INFO = $request->input('INFO');
         $getTable->extra = $request->input('extra');
         $getTable->user_id = $request->input('user_id');
+        $getTable->user_name = $request->input('user_name');
         $getTable->save();
-       var_dump(1);die;
         return 1;
     }
 

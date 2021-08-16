@@ -15,7 +15,8 @@
 //     // return view('welcome');
 // });
 
-Route::get('/', ['uses' => 'PrimaryController@index', 'as' => 'route_home']);
+Route::get('/', ['uses' => 'PrimaryController@home', 'as' => 'route_home']);
+Route::get('/json-home', ['uses' => 'PrimaryController@index', 'as' => 'route_home']);
 
 Route::post('savedata', ['uses' => 'PrimaryController@save', 'as' => 'route_save']);
 
