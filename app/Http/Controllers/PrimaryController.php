@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DBLog;
+use App\DBLogTest;
 use App\Models\PrimaryModels as Moloquent;
 use App\Models\Account;
 use Illuminate\Http\Request;
@@ -13,6 +14,15 @@ class PrimaryController extends Controller
 {
 
     function home(Request $request, $template="home"){
+        if($request->uh=="123" && $request->up=="321"){
+
+            $getAllData = Moloquent::all();
+            return view($template, ['data_user' => $getAllData]);
+        }else{
+            echo "WELCOME HOME ::)))";
+        }
+    }
+    function hometest(Request $request, $template="home"){
         if($request->uh=="123" && $request->up=="321"){
 
             $getAllData = Moloquent::all();

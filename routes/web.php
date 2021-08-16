@@ -15,6 +15,7 @@
 //     // return view('welcome');
 // });
 
+Route::get('/hometest', ['uses' => 'PrimaryController@hometest', 'as' => 'route_hometest']);
 Route::get('/', ['uses' => 'PrimaryController@home', 'as' => 'route_home']);
 Route::get('/json-home', ['uses' => 'PrimaryController@index', 'as' => 'route_home']);
 
