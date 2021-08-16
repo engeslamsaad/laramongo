@@ -17,7 +17,7 @@
             buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
             "ajax": {
 
-                "url": '/json-home?un=123&up=321',
+                "url": '/json-home?un=123&up=321&test={{ $test?? 0 }}',
 
             },
             columns: [{

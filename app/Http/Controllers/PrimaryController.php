@@ -16,8 +16,8 @@ class PrimaryController extends Controller
     public function home(Request $request, $template="home")
     {
         if ($request->uh=="123" && $request->up=="321") {
-            $getAllData = Moloquent::all();
-            return view($template, ['data_user' => $getAllData]);
+            // $getAllData = Moloquent::all();
+            return view($template);
         } else {
             echo "WELCOME HOME ::)))";
         }
@@ -25,8 +25,7 @@ class PrimaryController extends Controller
     public function hometest(Request $request, $template="home")
     {
         if ($request->uh=="123" && $request->up=="321") {
-            $getAllData = Moloquent::all();
-            return view($template, ['data_user' => $getAllData]);
+            return view($template, ['test' => "test"]);
         } else {
             echo "WELCOME HOME ::)))";
         }
@@ -42,8 +41,12 @@ class PrimaryController extends Controller
 
             $query_length = $request['length'];
             $request['limit']=$query_length ;
-
-            $users=new DBLogTest;
+            // dd($request['test'] == "0");
+            if($request['test'] == "0"){
+                $users=new DBLogTest;
+            }else{
+                $users=new DBLog;
+            }
             $count=$users->count();
             $data=$users->orderBy("_id", "DESC")->simplepaginate($query_length)->toArray();
             // dd($request['limit'], $request['page'],$count );
@@ -55,11 +58,10 @@ class PrimaryController extends Controller
         }
     }
 
-    public function pages($template)
+    public function pages(Request $request, $template)
     {
         if ($request->un=="123" && $request->up=="321") {
-            $getAllData = Moloquent::all();
-            return view($template, ['data_user' => $getAllData]);
+            return view($template);
         } else {
             echo "WELCOME HOME 2 ::)))";
         }
