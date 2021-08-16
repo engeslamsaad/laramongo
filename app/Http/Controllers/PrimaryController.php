@@ -70,6 +70,7 @@ class PrimaryController extends Controller
         $getTable->user_id = $request->input('user_id');
         $getTable->user_name = $request->input('user_name');
         $getTable->save();
+
         return 1;
     }
 
@@ -82,7 +83,7 @@ class PrimaryController extends Controller
         $getTable->user_id = $request->input('user_id');
         $getTable->user_name = $request->input('user_name');
         $getTable->save();
-        return 1;
+        return $getTable->message;
     }
 
     function save(Request $request){
