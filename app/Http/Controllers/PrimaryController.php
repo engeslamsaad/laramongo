@@ -81,7 +81,6 @@ class PrimaryController extends Controller
                     ->whereBetween('created_at', array($start, $stop))->get()
                     // ->where('created_at', '<=', $end)
                     ;
-            dd($users);
 
             }
             $columns=[
