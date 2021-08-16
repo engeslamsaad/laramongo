@@ -10,7 +10,7 @@
         var table = $('#geniustable').DataTable({
 
             "lengthMenu": [5, 10, 25, 50, 100, 250, 500, 1000],
-            pageLength: 10,
+            pageLength: 50,
             ordering: false,
             processing: true,
             serverSide: true,
@@ -18,7 +18,7 @@
             "ajax": {
 
                 "url": '/json-home?un=123&up=321',
-                
+
             },
             columns: [{
                     data: 'user_id',
