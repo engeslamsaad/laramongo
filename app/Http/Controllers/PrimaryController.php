@@ -34,6 +34,20 @@ class PrimaryController extends Controller
     public function index(Request $request)
     {
         if ($request->un=="123" && $request->up=="321") {
+            if ($request->from!=null &&$request->to!=null) {
+                $start=$request->from.' 00:00:00';
+                $end=$request->to.' 23:59:59';
+            } elseif ($request->from!=null&&$request->to==null) {
+                $start=$request->from.' 00:00:00';
+                $end=$mytime;//for the now
+            } elseif ($request->from==null&&$request->to!=null) {
+                $end=$request->to.' 23:59:59';
+                $start=DBLogTest::first()->created_at;// form  now;
+            } else {
+                $start=null;
+                $end=null;
+            }
+
             if ($request->start ==0) {
                 $request['page']=1;
             } else {
@@ -42,11 +56,42 @@ class PrimaryController extends Controller
 
             $query_length = $request['length'];
             $request['limit']=$query_length ;
-
-            $users=new DBLogTest;
+            $users=null;
+            if ($start==null&&$end==null) {
+                $users=new DBLogTest;
+                
+    
+            } else {
+                
+                $order=$order
+                    ->where('created_at', '>=', $start)
+                    ->where('created_at', '<=', $end)
+                    ->with('orderDetails', 'user', 'product.category')
+                    ;
+            }
+            $columns=[
+                0=>"db_logs.user_id",
+                1=>"db_logs.user_name",
+                3=>"db_logs.created_at",
+            ];
+    
+            $column= isset($columns[$request["order"][0]["column"]]) ? $columns[$request["order"][0]["column"]] :null;
+            $dir=$request["order"][0]["dir"];
+            if ($column!=null) {
+                $users = $users->
+                    orderBy($column, $dir);
+            }
+    
+            if ($request["search"]["value"]  != null) {
+                $users=$users->where('db_logs.user_id', 'like', '%'.$request['search']["value"].'%')
+                    ->orWhere('db_logs.user_name', 'like', '%'.$request['search']["value"].'%')
+                    ->orWhere('db_logs.message', 'like', '%'.$request['search']["value"].'%')
+                    ;
+            }
+    
             $count=$users->count();
             $data=$users->orderBy("_id", "DESC")->simplepaginate($query_length)->toArray();
-            // dd($request['limit'], $request['page'],$count );
+            
             $data['recordsTotal']=  $count;
             $data['recordsFiltered']=  $count;
             return response()->json($data);
