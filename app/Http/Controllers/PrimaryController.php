@@ -78,7 +78,7 @@ class PrimaryController extends Controller
                 
                 $users=$users
                     // ->where('created_at', '>=', $start)
-                    ->whereBetween('created_at', array($start, $stop))->get()
+                    ->whereBetween('created_at', array($start, $stop))
                     // ->where('created_at', '<=', $end)
                     ;
 
