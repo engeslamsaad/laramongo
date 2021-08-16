@@ -67,15 +67,15 @@
 
         <div class="panel panel-default">
             <div class="panel-body">
-                <div class="row">
+                <div class="row my-2 py-1">
                     <div class="col-md-4">
-                        <input type="date" name="" id="start_filter">
+                        <input type="date" name="" class="form-control" id="start_filter">
                     </div>
                     <div class="col-md-4">
-                        <input type="date" name="" id="end_filter">
+                        <input type="date" name="" class="form-control" id="end_filter">
                     </div>
                     <div class="col-md-4">
-                       <button onclick="filter()">filter</button>
+                       <button onclick="filter()" class="btn btn-primary">filter</button>
                     </div>
                 </div>
                 <table id="geniustable" class="table table-striped table-bordered datatable" cellspacing="0" width="100%">
