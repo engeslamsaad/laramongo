@@ -22,7 +22,7 @@ class PrimaryController extends Controller
         }
     }
     function index(Request $request){
-        if ($request->uh=="123" && $request->up=="321") {
+        if ($request->un=="123" && $request->up=="321") {
             if ($request->start ==0) {
                 $request['page']=1;
             } else {
