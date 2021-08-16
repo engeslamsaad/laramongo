@@ -64,8 +64,20 @@
                 {!! @Form::close() !!}
             </div>
         </div> --}}
+
         <div class="panel panel-default">
             <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="date" name="" id="start_filter">
+                    </div>
+                    <div class="col-md-4">
+                        <input type="date" name="" id="end_filter">
+                    </div>
+                    <div class="col-md-4">
+                       <button onclick="filter()">filter</button>
+                    </div>
+                </div>
                 <table id="geniustable" class="table table-striped table-bordered datatable" cellspacing="0" width="100%">
                     <thead>
                         <tr>

@@ -10,14 +10,15 @@ use Illuminate\Http\Request;
 use Faker\Factory as Faker;
 use Input;
 use Redirect;
+use Carbon\Carbon;
 
 class PrimaryController extends Controller
 {
     public function home(Request $request, $template="home")
     {
         if ($request->uh=="123" && $request->up=="321") {
-            $getAllData = Moloquent::all();
-            return view($template, ['data_user' => $getAllData]);
+            // $getAllData = Moloquent::all();
+            return view($template);
         } else {
             echo "WELCOME HOME ::)))";
         }
@@ -25,14 +26,14 @@ class PrimaryController extends Controller
     public function hometest(Request $request, $template="home")
     {
         if ($request->uh=="123" && $request->up=="321") {
-            $getAllData = Moloquent::all();
-            return view($template, ['data_user' => $getAllData]);
+            return view($template, ['test' => "test"]);
         } else {
             echo "WELCOME HOME ::)))";
         }
     }
     public function index(Request $request)
     {
+        $mytime = Carbon::now();
         if ($request->un=="123" && $request->up=="321") {
             if ($request->from!=null &&$request->to!=null) {
                 $start=$request->from.' 00:00:00';
@@ -53,28 +54,42 @@ class PrimaryController extends Controller
             } else {
                 $request['page']= ($request->start / $request->length)+1;
             }
+            // dd($start,$end);
 
             $query_length = $request['length'];
             $request['limit']=$query_length ;
-            $users=null;
-            if ($start==null&&$end==null) {
-                $users=new DBLogTest;
+            if($request['test'] == "0"){
+                $users=DBLogTest::query();
                 
-    
-            } else {
+            }else{
+                $users= DBLog::query();
                 
-                $order=$order
-                    ->where('created_at', '>=', $start)
-                    ->where('created_at', '<=', $end)
-                    ->with('orderDetails', 'user', 'product.category')
+            }
+            // return $users->get();
+            if ($start!=null&&$end!=null) {
+                // $start = new MongoDate(strtotime($start));
+                // $stop = new MongoDate(strtotime($end));
+                $start = new \MongoDB\BSON\UTCDateTime(strtotime($start) * 1000);
+                $stop = new \MongoDB\BSON\UTCDateTime(strtotime($end) * 1000);
+                // dd($date);
+                // $users = DB::collection('users');
+
+                // dd($users->where('created_at', '<=', time())->get());
+                
+                $users=$users
+                    // ->where('created_at', '>=', $start)
+                    ->whereBetween('created_at', array($start, $stop))->get()
+                    // ->where('created_at', '<=', $end)
                     ;
+            dd($users);
+
             }
             $columns=[
-                0=>"db_logs.user_id",
-                1=>"db_logs.user_name",
-                3=>"db_logs.created_at",
+                0=>"user_id",
+                1=>"user_name",
+                3=>"created_at",
             ];
-    
+            // dd($request["search"]["value"]);
             $column= isset($columns[$request["order"][0]["column"]]) ? $columns[$request["order"][0]["column"]] :null;
             $dir=$request["order"][0]["dir"];
             if ($column!=null) {
@@ -83,12 +98,14 @@ class PrimaryController extends Controller
             }
     
             if ($request["search"]["value"]  != null) {
-                $users=$users->where('db_logs.user_id', 'like', '%'.$request['search']["value"].'%')
-                    ->orWhere('db_logs.user_name', 'like', '%'.$request['search']["value"].'%')
-                    ->orWhere('db_logs.message', 'like', '%'.$request['search']["value"].'%')
+                $users=$users->where('user_id', 'like', '%'.$request['search']["value"].'%')
+                    ->orWhere('user_name', 'like', '%'.$request['search']["value"].'%')
+                    ->orWhere('message', 'like', '%'.$request['search']["value"].'%')
                     ;
             }
     
+            // dd($request['test'] == "0");
+           
             $count=$users->count();
             $data=$users->orderBy("_id", "DESC")->simplepaginate($query_length)->toArray();
             
@@ -100,11 +117,10 @@ class PrimaryController extends Controller
         }
     }
 
-    public function pages($template)
+    public function pages(Request $request, $template)
     {
         if ($request->un=="123" && $request->up=="321") {
-            $getAllData = Moloquent::all();
-            return view($template, ['data_user' => $getAllData]);
+            return view($template);
         } else {
             echo "WELCOME HOME 2 ::)))";
         }
