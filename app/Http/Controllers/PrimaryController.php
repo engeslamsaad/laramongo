@@ -58,7 +58,7 @@ class PrimaryController extends Controller
 
             $query_length = $request['length'];
             $request['limit']=$query_length ;
-            if($request['test'] == "0"){
+            if($request['test'] != "0"){
                 $users=DBLogTest::query();
                 
             }else{
