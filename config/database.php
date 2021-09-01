@@ -83,13 +83,14 @@ return [
         'mongodb' => [
             'driver' => 'mongodb',
             'host' => "vmi596445.contaboserver.net",
-            'port' => '27001',
+            'port' => '27017',
             'database' => 'users',
-            'username' => 'solid',
-            'password' => 'solidpassword',
-            'options' => [
+            // 'database' => 'users',
+            // 'username' => 'solid',
+            // 'password' => 'solidpassword',
+            // 'options' => [
                 
-            ]
+            // ]
         ],
     ],
 
