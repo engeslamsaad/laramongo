@@ -85,11 +85,12 @@ return [
             'host' => "vmi596445.contaboserver.net",
             'port' => '27017',
             'database' => 'users',
-            // 'username' => 'mongodbusername',
-            // 'password' => 'mongodbpassword',
-            // 'options' => [
-            //     'database' =>  'admin', // required with Mongo 3+
-            // ],
+            'database' => 'users',
+            'username' => 'solid',
+            'password' => 'solidpassword',
+            'options' => [
+                
+            ]
         ],
     ],
 
