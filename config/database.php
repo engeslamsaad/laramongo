@@ -85,12 +85,12 @@ return [
             'host' => "vmi596445.contaboserver.net",
             'port' => '27017',
             'database' => 'users',
-            'database' => 'users',
-            'username' => 'solid',
-            'password' => 'solidpassword',
-            'options' => [
+            // 'database' => 'users',
+            // 'username' => 'solid',
+            // 'password' => 'solidpassword',
+            // 'options' => [
                 
-            ]
+            // ]
         ],
     ],
 
